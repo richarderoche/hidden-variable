@@ -123,12 +123,6 @@ export const sitemapByTypeQuery = defineQuery(`
 export const settingsQuery = defineQuery(`
   *[_type == "settings"][0]{
     ...,
-    "headerNav": headerNav.navItems[]{
-      ${link},
-    },
-    "footerNav": footerNav.navItems[]{
-      ${link},
-    },
     ${seo},
   }
 `)

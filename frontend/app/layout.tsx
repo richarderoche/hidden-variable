@@ -24,10 +24,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const ogImage = urlForOpenGraphImage(settings?.ogImage as Image)
   const noIndex = settings?.noIndex ?? false
   return {
-    title: settings?.title
+    title: settings?.seoTitle
       ? {
-          template: `%s | ${settings.title}`,
-          default: settings.title || 'Personal website',
+          template: `%s | ${settings.seoTitle}`,
+          default: settings.seoTitle || 'Hidden Variable',
         }
       : undefined,
     description: settings?.description ? settings.description : undefined,

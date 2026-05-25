@@ -1,48 +1,36 @@
-import NavLinks from '@/components/shared/NavLinks'
 import SiteWidth from '@/components/shared/SiteWidth'
-import SocialIcon from '@/components/shared/SocialIcon'
 import {sanityFetch} from '@/sanity/lib/live'
 import {settingsQuery} from '@/sanity/lib/queries'
-import CurrentYear from './shared/CurrentYear'
+import LogoLeft from './icons/LogoLeft'
+import LogoRight from './icons/LogoRight'
+import LogoWordmark from './icons/LogoWordmark'
 
 export default async function Footer() {
   const {data} = await sanityFetch({
     query: settingsQuery,
     stega: false,
   })
-  const footerNav = data?.footerNav || []
-  const socialIcons = data?.socialIcons || []
+
+  const footerMailto = data?.footerMailto
+  const {text, email, subject} = footerMailto || {}
 
   return (
     <footer className="bottom-0 py-gut mt-gut">
-      <SiteWidth className="flex flex-col lg:flex-row lg:justify-between items-center gap-gut">
-        {footerNav && footerNav?.length > 0 && (
-          <nav role="navigation">
-            <NavLinks navItems={footerNav} ulClasses="flex flex-wrap gap-em" />
-          </nav>
-        )}
-
-        {socialIcons && (
-          <div className="flex gap-gut-50">
-            {socialIcons.map((link, key) => {
-              return (
-                <a
-                  key={key}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-24 hover:text-white"
-                  aria-label={link.icon}
-                >
-                  <SocialIcon name={link.icon} />
-                </a>
-              )
-            })}
+      <SiteWidth className="flex justify-between items-center gap-gut">
+        {email && (
+          <div className="grow">
+            <a
+              className="inline-link"
+              href={`mailto:${email}${subject ? `?subject=${subject}` : ''}`}
+            >
+              {text || email}
+            </a>
           </div>
         )}
-
-        <div>
-          &copy; <CurrentYear />. All Rights Reserved.
+        <div className="flex items-center h-[1.25em]" aria-label="Hidden Variable" role="img">
+          <LogoLeft className="w-auto h-full" aria-hidden="true" />
+          <LogoWordmark className="w-auto h-full" aria-hidden="true" />
+          <LogoRight className="w-auto h-full" aria-hidden="true" />
         </div>
       </SiteWidth>
     </footer>

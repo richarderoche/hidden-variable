@@ -8,10 +8,6 @@ export default defineType({
   icon: CogIcon,
   groups: [
     {
-      name: 'header',
-      title: 'Header',
-    },
-    {
       name: 'footer',
       title: 'Footer',
     },
@@ -26,34 +22,27 @@ export default defineType({
   ],
   fields: [
     defineField({
-      name: 'headerNav',
-      title: 'Header Navigation',
-      type: 'navLinks',
-      group: 'header',
-    }),
-    defineField({
-      title: 'Footer Nav',
-      name: 'footerNav',
-      type: 'navLinks',
+      name: 'footerMailto',
+      title: 'Footer Contact Link',
+      type: 'object',
       group: 'footer',
-    }),
-    defineField({
-      name: 'socialIcons',
-      title: 'Social Icons',
-      type: 'array',
-      group: 'footer',
-      of: [
-        {
-          type: 'socialLink',
-        },
+      fields: [
+        defineField({
+          name: 'text',
+          title: 'Text',
+          type: 'string',
+        }),
+        defineField({
+          name: 'email',
+          title: 'Email',
+          type: 'string',
+        }),        
+        defineField({
+          name: 'subject',
+          title: 'Subject',
+          type: 'string',
+        }),
       ],
-    }),
-    defineField({
-      name: 'title',
-      description: 'Used as the base in the <title> tag for SEO',
-      title: 'Site Title',
-      type: 'string',
-      group: 'seo',
     }),
     defineField({
       name: 'seo',

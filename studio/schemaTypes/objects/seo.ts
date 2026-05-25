@@ -20,7 +20,7 @@ export default defineType({
       title: 'SEO Title',
       type: 'string',
       description:
-        'Used as the <title> tag for SEO. Leave blank to use the page title.',
+        'Used as the <title> tag for SEO.',
     }),
     defineField({
       name: 'description',

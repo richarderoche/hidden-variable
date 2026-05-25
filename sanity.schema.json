@@ -1442,6 +1442,10 @@
                 },
                 {
                   "type": "string",
+                  "value": "small"
+                },
+                {
+                  "type": "string",
                   "value": "h1"
                 },
                 {
@@ -1455,14 +1459,6 @@
                 {
                   "type": "string",
                   "value": "h4"
-                },
-                {
-                  "type": "string",
-                  "value": "h5"
-                },
-                {
-                  "type": "string",
-                  "value": "h6"
                 }
               ]
             },
@@ -2433,18 +2429,6 @@
               },
               {
                 "type": "string",
-                "value": "ts-h4"
-              },
-              {
-                "type": "string",
-                "value": "ts-p-xl"
-              },
-              {
-                "type": "string",
-                "value": "ts-p-lg"
-              },
-              {
-                "type": "string",
                 "value": "ts-p-md"
               },
               {
@@ -2453,15 +2437,7 @@
               },
               {
                 "type": "string",
-                "value": "ts-p-xs"
-              },
-              {
-                "type": "string",
-                "value": "ts-h5"
-              },
-              {
-                "type": "string",
-                "value": "ts-h6"
+                "value": "ts-h4"
               }
             ]
           },
@@ -2558,18 +2534,6 @@
                           },
                           {
                             "type": "string",
-                            "value": "ts-h4"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-p-xl"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-p-lg"
-                          },
-                          {
-                            "type": "string",
                             "value": "ts-p-md"
                           },
                           {
@@ -2578,15 +2542,7 @@
                           },
                           {
                             "type": "string",
-                            "value": "ts-p-xs"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-h5"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-h6"
+                            "value": "ts-h4"
                           }
                         ]
                       },
@@ -3351,48 +3307,33 @@
           "type": "string"
         }
       },
-      "headerNav": {
+      "footerMailto": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "navLinks"
-        },
-        "optional": true
-      },
-      "footerNav": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "navLinks"
-        },
-        "optional": true
-      },
-      "socialIcons": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "array",
-          "of": {
-            "type": "object",
-            "attributes": {
-              "_key": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              }
+          "type": "object",
+          "attributes": {
+            "text": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
             },
-            "rest": {
-              "type": "inline",
-              "name": "socialLink"
+            "email": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "subject": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
             }
           }
-        },
-        "optional": true
-      },
-      "title": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
         },
         "optional": true
       },
