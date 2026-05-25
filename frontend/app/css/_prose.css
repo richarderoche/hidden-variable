@@ -21,16 +21,14 @@
   max-width: unset;
 
   h1,
-  h2,
-  h3,
-  h4,
-  h5 {
+  h2 {
     @apply text-balance max-w-max-ch;
   }
 
   p,
   li,
-  h6 {
+  h3,
+  h4 {
     @apply text-pretty max-w-max-ch;
   }
 
@@ -45,7 +43,8 @@
   &.text-balance {
     p,
     li,
-    h6 {
+    h3,
+    h4 {
       @apply text-balance;
     }
   }

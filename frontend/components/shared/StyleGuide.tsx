@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import {cn} from '@/lib/utils'
 import Button from './Button'
 import Divider from './Divider'
 import SiteGrid from './SiteGrid'
@@ -11,9 +11,7 @@ export default function StyleGuide() {
       <Divider />
       <SiteGrid yGaps>
         <div className="col-span-12 lg:col-span-4 mt-gut-200">
-          <h6 className="ts-h6 text-body-subtle mb-gut-200">
-            Heading/Label Styles
-          </h6>
+          <h6 className="ts-h6 text-body-subtle mb-gut-200">Heading/Label Styles</h6>
           <div className="flex flex-col gap-gut">
             {hStyles.map((style) => (
               <div key={style.name} className="col-span-12 lg:col-span-6">
@@ -23,9 +21,7 @@ export default function StyleGuide() {
           </div>
         </div>
         <div className="col-span-12 lg:col-span-6 mt-gut-200">
-          <h6 className="ts-h6 text-body-subtle mb-gut-200">
-            Paragraph Styles
-          </h6>
+          <h6 className="ts-h6 text-body-subtle mb-gut-200">Paragraph Styles</h6>
           <div className="flex flex-col gap-gut pr-gut">
             {pStyles.map((style) => (
               <div key={style.name} className="col-span-12 lg:col-span-6">
@@ -40,9 +36,8 @@ export default function StyleGuide() {
           <h6 className="ts-h6 text-body-subtle mb-gut-200">UI Elements</h6>
           <div className="grid grid-cols-2 lg:grid-cols-1 gap-gut">
             <div>
-              <Button path="/" text="Button" style="main" />
+              <Button path="/" text="Button" />
             </div>
-            <Button path="/" text="Alt Button" style="alt" />
           </div>
           <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-2 gap-4 mt-gut-200">
             {ColorSwatches.map((swatch) => (
@@ -50,10 +45,10 @@ export default function StyleGuide() {
                 <div
                   className={cn(
                     swatch.style,
-                    'flex items-center justify-center aspect-square border border-divider rounded-sm'
+                    'flex items-center justify-center aspect-square border border-divider rounded-sm',
                   )}
                 >
-                  <span className="ts-p-xs font-medium">{swatch.name}</span>
+                  <span className="ts-p-sm font-medium">{swatch.name}</span>
                 </div>
               </div>
             ))}
@@ -81,28 +76,12 @@ const hStyles = [
     style: 'ts-h3',
   },
   {
-    name: 'H4 Heading',
+    name: 'H4 Label',
     style: 'ts-h4',
-  },
-  {
-    name: 'H5 Label',
-    style: 'ts-h5',
-  },
-  {
-    name: 'H6 Label',
-    style: 'ts-h6',
   },
 ]
 
 const pStyles = [
-  {
-    name: 'P XL',
-    style: 'ts-p-xl',
-  },
-  {
-    name: 'P LG',
-    style: 'ts-p-lg',
-  },
   {
     name: 'P MD (Default)',
     style: 'ts-p-md',
@@ -111,31 +90,27 @@ const pStyles = [
     name: 'P SM',
     style: 'ts-p-sm',
   },
-  {
-    name: 'P XS',
-    style: 'ts-p-xs',
-  },
 ]
 
 const ColorSwatches = [
   {
     name: 'Black',
-    style: 'bg-black text-white',
+    style: 'bg-black',
   },
   {
     name: 'Gray 900',
-    style: 'bg-gray-900 text-white',
+    style: 'bg-gray-900',
+  },
+  {
+    name: 'Gray 500',
+    style: 'bg-gray-500',
   },
   {
     name: 'Gray 200',
-    style: 'bg-gray-200',
+    style: 'bg-gray-200 text-black',
   },
   {
     name: 'White',
-    style: 'bg-white',
-  },
-  {
-    name: 'Accent',
-    style: 'bg-accent',
+    style: 'bg-white text-black',
   },
 ]

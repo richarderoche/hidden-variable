@@ -1,4 +1,3 @@
-import { DocumentSheetIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
@@ -9,10 +8,7 @@ export default defineType({
     {
       type: 'block',
       marks: {
-        decorators: [
-          { title: 'Strong', value: 'strong' },
-          { title: 'Emphasis', value: 'em' },
-        ],
+        decorators: [],
         annotations: [
           {
             name: 'link',

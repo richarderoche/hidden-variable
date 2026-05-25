@@ -1,8 +1,9 @@
 :root {
   --black-oklch: 0 0 0;
-  --gray-900-oklch: 0.25 0 0;
-  --gray-200-oklch: 0.9 0 0;
-  --white-oklch: 1 0 0;
+  --gray-900-oklch: 0.21 0 0;
+  --gray-500-oklch: 0.6201 0 0;
+  --gray-200-oklch: 0.8853 0 0;
+  --white-oklch: 0.928 0 0;
   --accent-oklch: 0.6132 0.2078 267.2;
 }
 
@@ -12,7 +13,7 @@
 
   --theme-body: oklch(var(--white-oklch));
 
-  --theme-divider: oklch(var(--accent-oklch));
+  --theme-divider: oklch(var(--gray-500-oklch));
 
   --theme-current-bg: var(--theme-bg);
   .bg-bg-subtle {
@@ -26,8 +27,6 @@
 
   --theme-body: oklch(var(--black-oklch));
 
-  /* --theme-divider: oklch(var(--accent-oklch)); */
-
   --theme-current-bg: var(--theme-bg);
   .bg-bg-subtle {
     --theme-current-bg: var(--theme-bg-subtle);
@@ -37,9 +36,10 @@
 @theme {
   --color-black: oklch(var(--black-oklch));
   --color-gray-900: oklch(var(--gray-900-oklch));
+  --color-gray-500: oklch(var(--gray-500-oklch));
   --color-gray-200: oklch(var(--gray-200-oklch));
   --color-white: oklch(var(--white-oklch));
-  --color-accent: oklch(var(--accent-oklch));
+  --color-accent: oklch(var(--gray-500-oklch));
 }
 
 @theme inline {

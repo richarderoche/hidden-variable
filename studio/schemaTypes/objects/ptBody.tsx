@@ -8,10 +8,7 @@ export default defineType({
     defineArrayMember({
       type: 'block',
       marks: {
-        decorators: [
-          { title: 'Strong', value: 'strong' },
-          { title: 'Emphasis', value: 'em' },
-        ],
+        decorators: [],
         annotations: [],
       },
       styles: [],

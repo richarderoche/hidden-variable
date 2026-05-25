@@ -68,30 +68,35 @@ export const viewport: Viewport = {
 const sansFont = localFont({
   src: [
     {
-      path: '../public/fonts/PPMori-Regular.woff2',
+      path: '../public/fonts/ABCDiatypeSemi-Mono-Light.woff2',
       weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/PPMori-RegularItalic.woff2',
-      weight: '400',
-      style: 'italic',
-    },
-    {
-      path: '../public/fonts/PPMori-Bold.woff2',
-      weight: '600',
       style: 'normal',
     },
   ],
-  display: 'swap', // or replace with preload: true
-  variable: '--mori',
+  variable: '--diatype-semi-mono',
+})
+
+const serifFont = localFont({
+  src: [
+    {
+      path: '../public/fonts/bretagne_cucina-neretta_web.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  preload: true,
+  variable: '--cucina',
 })
 
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const {isEnabled: isDraftMode} = await draftMode()
 
   return (
-    <html lang="en" className={`${sansFont.variable} light-theme`} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${sansFont.variable} ${serifFont.variable} dark-theme`}
+      data-scroll-behavior="smooth"
+    >
       <body>
         <Lenis />
         <GSAP />

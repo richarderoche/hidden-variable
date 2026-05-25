@@ -1,12 +1,12 @@
 import NavLinks from '@/components/shared/NavLinks'
 import SiteWidth from '@/components/shared/SiteWidth'
 import SocialIcon from '@/components/shared/SocialIcon'
-import { sanityFetch } from '@/sanity/lib/live'
-import { settingsQuery } from '@/sanity/lib/queries'
+import {sanityFetch} from '@/sanity/lib/live'
+import {settingsQuery} from '@/sanity/lib/queries'
 import CurrentYear from './shared/CurrentYear'
 
 export default async function Footer() {
-  const { data } = await sanityFetch({
+  const {data} = await sanityFetch({
     query: settingsQuery,
     stega: false,
   })
@@ -14,7 +14,7 @@ export default async function Footer() {
   const socialIcons = data?.socialIcons || []
 
   return (
-    <footer className="bottom-0 bg-accent py-gut mt-gut">
+    <footer className="bottom-0 py-gut mt-gut">
       <SiteWidth className="flex flex-col lg:flex-row lg:justify-between items-center gap-gut">
         {footerNav && footerNav?.length > 0 && (
           <nav role="navigation">

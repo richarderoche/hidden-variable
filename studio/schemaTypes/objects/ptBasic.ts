@@ -1,4 +1,4 @@
-import { DocumentPdfIcon, DocumentSheetIcon } from '@sanity/icons'
+import { DocumentPdfIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
@@ -9,10 +9,7 @@ export default defineType({
     {
       type: 'block',
       marks: {
-        decorators: [
-          { title: 'Strong', value: 'strong' },
-          { title: 'Emphasis', value: 'em' },
-        ],
+        decorators: [],
         annotations: [
           {
             name: 'link',
@@ -50,12 +47,11 @@ export default defineType({
       },
       styles: [
         { title: 'Normal', value: 'normal' },
+        { title: 'Small', value: 'small' },
         { title: 'Heading 1', value: 'h1' },
         { title: 'Heading 2', value: 'h2' },
         { title: 'Heading 3', value: 'h3' },
-        { title: 'Heading 4', value: 'h4' },
-        { title: 'Label', value: 'h5' },
-        { title: 'Label Small', value: 'h6' },
+        { title: 'Label', value: 'h4' },
       ],
     },
   ],

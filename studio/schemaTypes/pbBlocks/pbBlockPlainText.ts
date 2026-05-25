@@ -5,20 +5,15 @@ export const textStyleOptions = [
   { title: 'H1', value: 'ts-h1' },
   { title: 'H2', value: 'ts-h2' },
   { title: 'H3', value: 'ts-h3' },
-  { title: 'H4', value: 'ts-h4' },
-  { title: 'Body XL', value: 'ts-p-xl' },
-  { title: 'Body Large', value: 'ts-p-lg' },
   { title: 'Body Medium', value: 'ts-p-md' },
   { title: 'Body Small', value: 'ts-p-sm' },
-  { title: 'Body XS', value: 'ts-p-xs' },
-  { title: 'Label', value: 'ts-h5' },
-  { title: 'Label Small', value: 'ts-h6' },
+  { title: 'Label', value: 'ts-h4' },
 ]
 
 // If adding options, add classes to frontend/safelist-classes.txt
 export const textColorOptions = [
-  { title: 'Body Normal', value: 'text-body' },
-  { title: 'Accent', value: 'text-accent' },
+  { title: 'Normal', value: 'text-body' },
+  { title: 'Gray', value: 'text-accent' },
 ]
 
 export default defineType({
