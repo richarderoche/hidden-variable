@@ -1,0 +1,52 @@
+@utility prose-siteColor {
+  --tw-prose-body: currentColor;
+  --tw-prose-headings: currentColor;
+  --tw-prose-lead: currentColor;
+  --tw-prose-links: currentColor;
+  --tw-prose-bold: currentColor;
+  --tw-prose-counters: var(--color-accent);
+  --tw-prose-bullets: var(--color-accent);
+  --tw-prose-hr: currentColor;
+  --tw-prose-quotes: currentColor;
+  --tw-prose-quote-borders: currentColor;
+  --tw-prose-captions: currentColor;
+  --tw-prose-code: currentColor;
+  --tw-prose-pre-code: currentColor;
+  --tw-prose-pre-bg: currentColor;
+  --tw-prose-th-borders: currentColor;
+  --tw-prose-td-borders: currentColor;
+}
+
+.prose {
+  max-width: unset;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply text-balance max-w-max-ch;
+  }
+
+  p,
+  li,
+  h6 {
+    @apply text-pretty max-w-max-ch;
+  }
+
+  p:empty {
+    @apply min-h-[.1px];
+  }
+
+  li::marker {
+    @apply text-accent;
+  }
+
+  &.text-balance {
+    p,
+    li,
+    h6 {
+      @apply text-balance;
+    }
+  }
+}

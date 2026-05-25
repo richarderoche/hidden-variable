@@ -1,0 +1,24 @@
+{
+  "name": "inpr-next-sanity-starter",
+  "private": true,
+  "workspaces": [
+    "studio",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "npx run-p --print-label dev:*",
+    "dev:next": "npm run dev --workspace=frontend",
+    "dev:studio": "npm run dev --workspace=studio",
+    "format": "prettier --cache --write .",
+    "import-sample-data": "cd studio && sanity dataset import sample-data.tar.gz --dataset production --replace",
+    "lint": "npm run lint --workspace=frontend",
+    "type-check": "npm run type-check --workspaces"
+  },
+  "prettier": "@sanity/prettier-config",
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
+    "@sanity/prettier-config": "^3.0.0",
+    "npm-run-all2": "^5.0.2",
+    "prettier": "^3.8.3"
+  }
+}

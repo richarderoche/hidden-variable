@@ -1,0 +1,65 @@
+@utility grid-stack {
+  grid-area: 1 / -1;
+}
+
+@utility nice-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+@utility nice-underline-stealth {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.125em;
+  text-decoration-color: transparent;
+}
+
+@utility center-caps {
+  position: relative;
+  bottom: -0.0625em;
+}
+
+@utility no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@utility text-* {
+  font-size: calc(var(--spacing) * --value(number));
+}
+
+/*
+Declare as original font size / original gut size in px.
+Example: ts-size-24/36 → font-size = var(--gut) × (24÷36)
+*/
+@utility ts-size-* {
+  font-size: calc(var(--gut) * --value(ratio, [ratio]));
+}
+
+@utility leading-* {
+  line-height: calc(--value(number) / 100);
+}
+
+@utility tracking-* {
+  letter-spacing: calc(--value(number) * 0.01em);
+}
+
+@utility -tracking-* {
+  letter-spacing: calc((--value(number) * -1) * 0.01em);
+}
+
+@utility hanging-quotes {
+  position: relative;
+  &::before {
+    content: '\201C';
+    position: absolute;
+    left: -0.5em;
+  }
+  &::after {
+    content: '\201D';
+  }
+}

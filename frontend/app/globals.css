@@ -1,0 +1,82 @@
+@import 'tailwindcss';
+@import './css/_responsive.css';
+@import './css/_utilities.css';
+@import './css/_colors.css';
+@import './css/_type.css';
+@import './css/_prose.css';
+@import './css/_lenis.css';
+@plugin "@tailwindcss/typography";
+@plugin "tw-easing-gradients";
+
+@theme {
+  /* (mirror breakpoints in _responsive.css if edited) */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 37.5rem; /* 600px */
+  --breakpoint-md: 48rem; /* 768px */
+  --breakpoint-lg: 64rem; /* 1024px */
+  --breakpoint-xl: 80rem; /* 1280px */
+  --breakpoint-2xl: 90rem; /* 1440px */
+  --breakpoint-3xl: 100rem; /* 1600px */
+  --breakpoint-4xl: 120rem; /* 1920px */
+  /* --breakpoint-5xl: 140rem; 2240px */
+  /* --breakpoint-6xl: 160rem; 2560px */
+
+  --leading-*: initial;
+  --tracking-*: initial;
+
+  --spacing: 0.0625rem;
+  --spacing-em: 1em;
+  --spacing-gut: var(--gut);
+  --spacing-gut-25: calc(var(--gut) / 4);
+  --spacing-gut-33: calc(var(--gut) / 3);
+  --spacing-gut-50: calc(var(--gut) / 2);
+  --spacing-gut-66: calc(var(--gut) / 1.5);
+  --spacing-gut-75: calc(var(--gut) * 0.75);
+  --spacing-gut-100: var(--gut);
+  --spacing-gut-150: calc(var(--gut) * 1.5);
+  --spacing-gut-200: calc(var(--gut) * 2);
+  --spacing-gut-250: calc(var(--gut) * 2.5);
+  --spacing-gut-300: calc(var(--gut) * 3);
+  --spacing-gut-400: calc(var(--gut) * 4);
+  --spacing-gut-500: calc(var(--gut) * 5);
+  --spacing-gut-600: calc(var(--gut) * 6);
+  --spacing-gut-700: calc(var(--gut) * 7);
+  --spacing-gut-800: calc(var(--gut) * 8);
+  --spacing-gut-900: calc(var(--gut) * 9);
+  --spacing-gut-1000: calc(var(--gut) * 10);
+  --spacing-outdent: -0.065em;
+  --spacing-max-ch: 55ch;
+  --spacing-header: calc(var(--gut) * 2);
+
+  /* Use .corner-container > .corner or .corner-sm
+  for container-relative rounded corners */
+  --radius-xs: 0.4rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 2rem;
+}
+
+body {
+  @apply antialiased min-w-[320px] selection:bg-accent/50;
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+/*
+Use .corner-container > .corner
+for container-relative rounded corners
+*/
+
+.corner-container {
+  @apply @container/corner;
+}
+
+.corner {
+  @apply overflow-hidden rounded-xs @sm/corner:rounded-sm @md/corner:rounded-md @lg/corner:rounded-lg @xl/corner:rounded-lg;
+}
+
+.paused-by-button [data-marqy] > [data-marqy-inner] > [data-marqy-content] {
+  animation-play-state: paused;
+}

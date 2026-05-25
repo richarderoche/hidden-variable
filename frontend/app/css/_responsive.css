@@ -1,0 +1,64 @@
+/*
+If these change, make sure to update the respective values in the type styles.
+*/
+
+:root {
+  --gut: 1rem; /* 16px */
+}
+/* 400px */
+@media (min-width: 25rem) {
+  :root {
+    --gut: 1.125rem; /* 18px */
+  }
+}
+/* 500px */
+@media (min-width: 31.25rem) {
+  :root {
+    --gut: 1.40625rem; /* 22.5px */
+  }
+}
+/* 600px */
+@media (min-width: 37.5rem) {
+  :root {
+    --gut: 1.6875rem; /* 27px */
+  }
+}
+/* 768px */
+@media (min-width: 48rem) {
+  :root {
+    --gut: 1.875rem; /* 30px */
+  }
+}
+/* 1024px */
+@media (min-width: 64rem) {
+  :root {
+    --gut: 1.5625rem; /* 25px */
+  }
+}
+/* 1280px */
+@media (min-width: 80rem) {
+  :root {
+    --gut: 2rem; /* 32px */
+  }
+}
+/* 1440px */
+@media (min-width: 90rem) {
+  :root {
+    --gut: 2.25rem; /* 36px */
+  }
+}
+/* 1600px */
+@media (min-width: 100rem) {
+  :root {
+    --gut: 2.5rem; /* 40px */
+  }
+}
+/* 1920px */
+@media (min-width: 120rem) {
+  :root {
+    --gut: 3rem; /* 48px */
+  }
+}
+
+/* Custom Media Queries */
+@custom-variant widescreen (@media (min-aspect-ratio: 16/10));
