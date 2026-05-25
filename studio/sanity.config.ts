@@ -29,7 +29,7 @@ export const muxConfig = {
 */
 export default defineConfig({
   name: 'default',
-  title: 'Sanity / Website',
+  title: 'Sanity / HV',
 
   projectId: projectId,
   dataset: dataset,
