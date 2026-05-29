@@ -15,6 +15,7 @@ import pbBlockDivider from './pbBlocks/pbBlockDivider'
 import pbBlockImage from './pbBlocks/pbBlockImage'
 import pbBlockMarquee from './pbBlocks/pbBlockMarquee'
 import pbBlockPlainText from './pbBlocks/pbBlockPlainText'
+import pbBlockStats from './pbBlocks/pbBlockStats'
 import pbBlockText from './pbBlocks/pbBlockText'
 import pbBlockVideoEmbed from './pbBlocks/pbBlockVideoEmbed'
 import pbSections from './pbSections'
@@ -42,6 +43,7 @@ export const schemaTypes = [
   navExternal,
   navLinks,
   //navPage,
+  pbBlockStats,
   pbBlockImage,
   pbBlockButton,
   pbBlocks,

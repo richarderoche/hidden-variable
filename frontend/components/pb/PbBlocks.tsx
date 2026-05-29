@@ -1,18 +1,19 @@
 'use client'
 
-import { cn } from '@/lib/utils'
-import type { PbBlockVideoEmbed } from '@/sanity.types'
-import { NavItem, PbBlocksQueryResult } from '@/types'
-import { PortableTextBlock } from 'next-sanity'
-import type { Image as SanityImageType } from 'sanity'
+import {cn} from '@/lib/utils'
+import type {PbBlockVideoEmbed} from '@/sanity.types'
+import {NavItem, PbBlocksQueryResult} from '@/types'
+import {PortableTextBlock} from 'next-sanity'
+import type {Image as SanityImageType} from 'sanity'
 import Button from '../shared/Button'
-import { CustomPortableText } from '../shared/CustomPortableText'
+import {CustomPortableText} from '../shared/CustomPortableText'
 import Divider from '../shared/Divider'
 import ImageBasic from '../shared/ImageBasic'
 import RichTextWrap from '../shared/RichTextWrap'
+import StatBracket from '../shared/StatBracket'
 import VideoEmbed from '../shared/VideoEmbed'
 import MarqueeBlock from './MarqueeBlock'
-import { useSanityDataAttribute } from './SanityVisualEditingContext'
+import {useSanityDataAttribute} from './SanityVisualEditingContext'
 
 export interface PbBlocksProps {
   columnBlocks: PbBlocksQueryResult
@@ -35,7 +36,7 @@ export default function PbBlocks({
     desktop: 'lg:grid-cols-1',
   },
 }: PbBlocksProps) {
-  const { getDataAttribute } = useSanityDataAttribute()
+  const {getDataAttribute} = useSanityDataAttribute()
   return (
     <div
       className={cn(
@@ -43,22 +44,20 @@ export default function PbBlocks({
         blockWidths.mobile,
         blockWidths.tablet,
         blockWidths.desktop,
-        spaceBetweenBlocks
+        spaceBetweenBlocks,
       )}
     >
       {columnBlocks &&
         columnBlocks.map((block) => {
-          const { _key, _type } = block
-          const blockDataSanity = getDataAttribute(['pbBlocks', { _key }])
+          const {_key, _type} = block
+          const blockDataSanity = getDataAttribute(['pbBlocks', {_key}])
 
           switch (_type) {
             // Rich Text Block
             case 'pbBlockText':
               return (
                 <RichTextWrap key={_key} data-sanity={blockDataSanity}>
-                  <CustomPortableText
-                    value={block.textContent as PortableTextBlock[]}
-                  />
+                  <CustomPortableText value={block.textContent as PortableTextBlock[]} />
                 </RichTextWrap>
               )
 
@@ -73,11 +72,7 @@ export default function PbBlocks({
             // Image Block
             case 'pbBlockImage':
               return (
-                <div
-                  key={_key}
-                  data-sanity={blockDataSanity}
-                  className="corner-container"
-                >
+                <div key={_key} data-sanity={blockDataSanity} className="corner-container">
                   <ImageBlock block={block} trueSizes={trueSizes} />
                 </div>
               )
@@ -123,6 +118,16 @@ export default function PbBlocks({
                 </div>
               )
 
+            // Stats Block
+            case 'pbBlockStats':
+              return (
+                <div key={_key} data-sanity={blockDataSanity} className="flex flex-wrap gap-gut-50">
+                  {block.stats?.map((stat: string, index: number) => (
+                    <StatBracket key={`${_key}-${index}`} stat={stat} />
+                  ))}
+                </div>
+              )
+
             default:
               return null
           }
@@ -131,13 +136,13 @@ export default function PbBlocks({
   )
 }
 
-export function PlainTextBlock({ block }) {
+export function PlainTextBlock({block}) {
   return (
     <div
       className={cn(
         block.textStyle || 'ts-p-md',
         block.color,
-        block.balanceLines ? 'text-balance' : 'text-pretty'
+        block.balanceLines ? 'text-balance' : 'text-pretty',
       )}
     >
       {block.textContent || ''}
@@ -145,7 +150,7 @@ export function PlainTextBlock({ block }) {
   )
 }
 
-export function ImageBlock({ block, trueSizes }) {
+export function ImageBlock({block, trueSizes}) {
   return (
     <>
       <div
@@ -163,23 +168,17 @@ export function ImageBlock({ block, trueSizes }) {
         />
       </div>
       {block.caption && (
-        <div className="ts-p-sm text-pretty text-body-subtle mt-gut-50">
-          {block.caption}
-        </div>
+        <div className="ts-p-sm text-pretty text-body-subtle mt-gut-50">{block.caption}</div>
       )}
     </>
   )
 }
 
-export function ButtonBlock({ block }) {
+export function ButtonBlock({block}) {
   return (
     <>
-      {block.linkType === 'sitePage' && (
-        <Button navItem={block.sitePage as NavItem} />
-      )}
-      {block.linkType === 'externalLink' && (
-        <Button navItem={block.externalLink as NavItem} />
-      )}
+      {block.linkType === 'sitePage' && <Button navItem={block.sitePage as NavItem} />}
+      {block.linkType === 'externalLink' && <Button navItem={block.externalLink as NavItem} />}
       {block.linkType === 'file' && (
         <Button
           path={block.fileLink?.url || ''}
@@ -193,7 +192,6 @@ export function ButtonBlock({ block }) {
 
 function getRatioPadding(block: PbBlockVideoEmbed) {
   const ar = block.videoAspectRatio
-  const paddingRatio =
-    ar && ar.width && ar.height ? ar.height / ar.width : 9 / 16
-  return { paddingTop: paddingRatio * 100 + '%' }
+  const paddingRatio = ar && ar.width && ar.height ? ar.height / ar.width : 9 / 16
+  return {paddingTop: paddingRatio * 100 + '%'}
 }

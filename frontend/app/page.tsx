@@ -14,7 +14,7 @@ export default async function IndexRoute() {
   }
 
   const {firstIsHero, firstPbSectionKey} = getFirstSectionInfo(data)
-  const showStyleGuide = true
+  const showStyleGuide = false
 
   return (
     <PageWrapper className={firstIsHero ? '' : 'pt-header'}>
