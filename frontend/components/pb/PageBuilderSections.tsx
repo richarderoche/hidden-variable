@@ -11,6 +11,7 @@ import SectionBeliefs from './SectionBeliefs'
 import SectionGridDouble from './SectionGridDouble'
 import SectionGridMulti from './SectionGridMulti'
 import SectionGridSingle from './SectionGridSingle'
+import SectionPointilismCarousel from './SectionPointilismCarousel'
 import SectionTitleHero from './SectionTitleHero'
 
 export interface PageBuilderContentProps {
@@ -64,6 +65,9 @@ export default function PageBuilderSections({
                   <SectionTitleHero section={section} isFirst={_key === firstPbSectionKey} />
                 )}
                 {section._type === 'pbBeliefs' && <SectionBeliefs section={section} />}
+                {section._type === 'pbPointilismCarousel' && (
+                  <SectionPointilismCarousel section={section} />
+                )}
               </SanityVisualEditingPath>
             </div>
           </section>

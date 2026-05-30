@@ -9,6 +9,7 @@ export default defineType({
     {type: 'pbGridMulti'},
     {type: 'pbGridSingle'},
     {type: 'pbGridDouble'},
+    {type: 'pbPointilismCarousel'},
     {type: 'pbBeliefs'},
   ],
 })

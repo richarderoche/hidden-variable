@@ -1,7 +1,7 @@
-import { IconBoxAlignTop } from '@tabler/icons-react'
-import { defineField, defineType } from 'sanity'
-import { getRowWidthTitle } from '../../lib/utils'
-import { rowWidthField } from '../fields'
+import {IconBoxAlignTop} from '@tabler/icons-react'
+import {defineField, defineType} from 'sanity'
+import {getRowWidthTitle} from '../../lib/utils'
+import {rowWidthField} from '../fields'
 
 export default defineType({
   title: 'Title/Hero Section',
@@ -20,15 +20,15 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Text Only', value: 'text' },
-          { title: 'Hero Image', value: 'hero' },
+          {title: 'Text Only', value: 'text'},
+          {title: 'Hero Image', value: 'hero'},
         ],
       },
       initialValue: 'text',
     }),
     defineField({
       ...rowWidthField,
-      hidden: ({ parent }) => parent?.titleMode === 'hero',
+      hidden: ({parent}) => parent?.titleMode === 'hero',
     }),
     defineField({
       title: 'Title',
@@ -47,16 +47,16 @@ export default defineType({
       type: 'image',
       options: {
         hotspot: {
-          previews: [{ title: '5:2', aspectRatio: 2.5 }],
+          previews: [{title: '5:2', aspectRatio: 2.5}],
         },
       },
-      hidden: ({ parent }) => parent?.titleMode === 'text',
+      hidden: ({parent}) => parent?.titleMode === 'text',
     }),
     defineField({
       title: 'Image Alt Text',
       name: 'heroImageAltText',
       type: 'string',
-      hidden: ({ parent }) => parent?.titleMode === 'text',
+      hidden: ({parent}) => parent?.titleMode === 'text',
     }),
   ],
   preview: {
@@ -66,7 +66,7 @@ export default defineType({
       title: 'title',
       subtitle: 'subtitle',
     },
-    prepare({ rowWidth, titleMode, title, subtitle }) {
+    prepare({rowWidth, titleMode, title, subtitle}) {
       const rowWidthTitle = getRowWidthTitle(rowWidth)
       const mode = titleMode === 'hero' ? 'Hero' : 'Text'
       const name = title || subtitle

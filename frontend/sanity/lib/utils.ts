@@ -17,6 +17,21 @@ export function urlForOpenGraphImage(image: Image | null | undefined) {
   return imageBuilder?.image(image)?.width(1200).height(627).fit('crop').auto('format').url()
 }
 
+export function urlForPointilismSlide(image: Image | null | undefined) {
+  if (!image?.asset?._ref) {
+    return undefined
+  }
+  return imageBuilder
+    ?.image(image)
+    ?.width(150)
+    .height(200)
+    .fit('crop')
+    .auto('format')
+    .saturation(-100)
+    .quality(40)
+    .url()
+}
+
 //
 // Route Resolver
 

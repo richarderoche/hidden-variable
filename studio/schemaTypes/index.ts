@@ -25,6 +25,7 @@ import pbColSettings from './pbSections/pbColSettings'
 import pbGridDouble from './pbSections/pbGridDouble'
 import pbGridMulti from './pbSections/pbGridMulti'
 import pbGridSingle from './pbSections/pbGridSingle'
+import pbPointilismCarousel from './pbSections/pbPointilismCarousel'
 import pbSectionSettings from './pbSections/pbSectionSettings'
 import pbTitleSection from './pbSections/pbTitle'
 import home from './singletons/home'
@@ -58,6 +59,7 @@ export const schemaTypes = [
   pbGridMulti,
   pbGridSingle,
   pbGridDouble,
+  pbPointilismCarousel,
   pbSections,
   pbSectionSettings,
   pbTitleSection,
