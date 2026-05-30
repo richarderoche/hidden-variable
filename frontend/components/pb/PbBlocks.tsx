@@ -143,6 +143,7 @@ export function PlainTextBlock({block}) {
         block.textStyle || 'ts-p-md',
         block.color,
         block.balanceLines ? 'text-balance' : 'text-pretty',
+        block.textAlign,
       )}
     >
       {block.textContent || ''}

@@ -2458,6 +2458,27 @@
           },
           "optional": true
         },
+        "textAlign": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "text-left"
+              },
+              {
+                "type": "string",
+                "value": "text-center"
+              },
+              {
+                "type": "string",
+                "value": "text-right"
+              }
+            ]
+          },
+          "optional": true
+        },
         "color": {
           "type": "objectAttribute",
           "value": {
