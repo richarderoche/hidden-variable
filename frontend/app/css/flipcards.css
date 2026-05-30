@@ -1,0 +1,31 @@
+.flipcard {
+  perspective: 1000px;
+  background: transparent;
+
+  &:hover,
+  &.flipped {
+    .flipcard-inner {
+      transform: rotateX(180deg);
+    }
+  }
+}
+
+.flipcard-inner {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0, 1);
+  transform-style: preserve-3d;
+}
+
+.reduced-motion {
+  .flipcard-inner {
+    transition: none;
+  }
+}
+
+.flipcard-front,
+.flipcard-back {
+  backface-visibility: hidden;
+}
+
+.flipcard-back {
+  transform: rotateX(180deg);
+}

@@ -10,3 +10,7 @@ export function usePrefersReducedMotion() {
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
   return prefersReducedMotion
 }
+
+export function useCanHover() {
+  return useMediaQuery('(hover: hover)')
+}

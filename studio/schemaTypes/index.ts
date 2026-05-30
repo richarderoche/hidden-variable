@@ -20,6 +20,7 @@ import pbBlockText from './pbBlocks/pbBlockText'
 import pbBlockVideoEmbed from './pbBlocks/pbBlockVideoEmbed'
 import pbSections from './pbSections'
 import column from './pbSections/column'
+import pbBeliefs from './pbSections/pbBeliefs'
 import pbColSettings from './pbSections/pbColSettings'
 import pbGridDouble from './pbSections/pbGridDouble'
 import pbGridMulti from './pbSections/pbGridMulti'
@@ -48,6 +49,7 @@ export const schemaTypes = [
   pbBlockButton,
   pbBlocks,
   pbBlockDivider,
+  pbBeliefs,
   pbBlockMarquee,
   pbBlockPlainText,
   pbBlockText,

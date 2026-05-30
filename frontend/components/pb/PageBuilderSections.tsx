@@ -1,12 +1,13 @@
 'use client'
 
-import { PbSections } from '@/sanity.types'
-import { PageBuilderData } from '@/types'
+import {PbSections} from '@/sanity.types'
+import {PageBuilderData} from '@/types'
 import {
   SanityPathSegment,
   SanityVisualEditingPath,
   useSanityDataAttribute,
 } from './SanityVisualEditingContext'
+import SectionBeliefs from './SectionBeliefs'
 import SectionGridDouble from './SectionGridDouble'
 import SectionGridMulti from './SectionGridMulti'
 import SectionGridSingle from './SectionGridSingle'
@@ -25,23 +26,18 @@ export default function PageBuilderSections({
   pbSections: PbSections
   firstPbSectionKey: string
 }) {
-  const { getDataAttribute } = useSanityDataAttribute()
+  const {getDataAttribute} = useSanityDataAttribute()
   if (!pbSections?.length) return null
 
   return (
     <div className="flex flex-col">
       {pbSections.map((section) => {
-        const { _key, sectionSettings } = section
-        const {
-          enableSection = true,
-          sectionId,
-          marginTop,
-          marginBottom,
-        } = sectionSettings || {}
+        const {_key, sectionSettings} = section
+        const {enableSection = true, sectionId, marginTop, marginBottom} = sectionSettings || {}
 
         if (!enableSection) return null
 
-        const sectionPath: SanityPathSegment[] = ['pbSections', { _key }]
+        const sectionPath: SanityPathSegment[] = ['pbSections', {_key}]
 
         return (
           <section
@@ -52,18 +48,12 @@ export default function PageBuilderSections({
           >
             <div
               style={{
-                paddingTop: marginTop
-                  ? `calc(var(--gut) * ${marginTop})`
-                  : undefined,
-                paddingBottom: marginBottom
-                  ? `calc(var(--gut) * ${marginBottom})`
-                  : undefined,
+                paddingTop: marginTop ? `calc(var(--gut) * ${marginTop})` : undefined,
+                paddingBottom: marginBottom ? `calc(var(--gut) * ${marginBottom})` : undefined,
               }}
             >
               <SanityVisualEditingPath path={[...sectionPath]}>
-                {section._type === 'pbGridMulti' && (
-                  <SectionGridMulti section={section} />
-                )}
+                {section._type === 'pbGridMulti' && <SectionGridMulti section={section} />}
                 {section._type === 'pbGridSingle' && (
                   <SectionGridSingle section={section} sectionKey={_key} />
                 )}
@@ -71,11 +61,9 @@ export default function PageBuilderSections({
                   <SectionGridDouble section={section} sectionKey={_key} />
                 )}
                 {section._type === 'pbTitleSection' && (
-                  <SectionTitleHero
-                    section={section}
-                    isFirst={_key === firstPbSectionKey}
-                  />
+                  <SectionTitleHero section={section} isFirst={_key === firstPbSectionKey} />
                 )}
+                {section._type === 'pbBeliefs' && <SectionBeliefs section={section} />}
               </SanityVisualEditingPath>
             </div>
           </section>
