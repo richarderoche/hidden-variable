@@ -35,6 +35,11 @@ Example: ts-size-24/36 → font-size = var(--gut) × (24÷36)
   @apply font-sans leading-125 ts-size-12/18 md:ts-size-27/50;
 }
 
+/* Special */
+.ts-tagline {
+  @apply font-sans leading-none ts-size-12/18 md:ts-size-16/25;
+}
+
 /* Misc */
 .inline-link {
   @apply nice-underline transition-opacity hover:opacity-50;
