@@ -73,6 +73,8 @@ export default function LogoMotto({className, ...props}: React.SVGProps<SVGSVGEl
         fill="currentColor"
         viewBox="0 0 4281 278"
         className={className}
+        aria-label="exponential outcomes - together"
+        role="img"
         {...props}
       >
         <path
