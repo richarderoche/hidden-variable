@@ -1,5 +1,6 @@
 'use client'
 
+import {usePrefersReducedMotion} from '@/lib/hooks'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/all'
@@ -18,7 +19,7 @@ const DELAY = 0.2
 
 export default function Revealer({children, direction = 'fade-up', ...props}: RevealerProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const reducedMotion = true
+  const reducedMotion = usePrefersReducedMotion()
   const distance = reducedMotion || direction === 'fade-only' ? 0 : 30
 
   useGSAP(
