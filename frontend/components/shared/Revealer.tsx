@@ -20,8 +20,6 @@ const DELAY = 0.2
 export default function Revealer({children, direction = 'fade-up', ...props}: RevealerProps) {
   const ref = useRef<HTMLDivElement>(null)
   const reducedMotion = usePrefersReducedMotion()
-  const motionReady = reducedMotion !== undefined
-  const distance = reducedMotion || direction === 'fade-only' ? 0 : 30
 
   useGSAP(
     () => {
@@ -29,6 +27,8 @@ export default function Revealer({children, direction = 'fade-up', ...props}: Re
 
       const el = ref.current
       if (!el) return
+
+      const distance = reducedMotion || direction === 'fade-only' ? 0 : 30
 
       const fromMove = direction === 'fade-right' ? {x: -distance} : {y: distance}
       const toMove = direction === 'fade-right' ? {x: 0} : {y: 0}
@@ -68,7 +68,7 @@ export default function Revealer({children, direction = 'fade-up', ...props}: Re
         )
       }
     },
-    {scope: ref, dependencies: [direction, distance, motionReady]},
+    {scope: ref, dependencies: [direction, reducedMotion]},
   )
 
   return (
