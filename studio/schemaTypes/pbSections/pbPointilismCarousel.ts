@@ -13,6 +13,11 @@ export default defineType({
       type: 'pbSectionSettings',
     }),
     defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+    }),
+    defineField({
       name: 'tagline',
       title: 'Tagline',
       type: 'string',

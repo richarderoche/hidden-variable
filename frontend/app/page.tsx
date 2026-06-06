@@ -13,11 +13,11 @@ export default async function IndexRoute() {
     notFound()
   }
 
-  const {firstIsHero, firstPbSectionKey} = getFirstSectionInfo(data)
+  const {firstPbSectionKey} = getFirstSectionInfo(data)
   const showStyleGuide = false
 
   return (
-    <PageWrapper className={firstIsHero ? '' : 'pt-header'}>
+    <PageWrapper>
       {showStyleGuide && <StyleGuide />}
       <PageBuilder data={data} firstPbSectionKey={firstPbSectionKey ?? ''} />
     </PageWrapper>

@@ -1,5 +1,5 @@
-import { CogIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import {CogIcon} from '@sanity/icons'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   title: 'Section Settings',
@@ -7,9 +7,7 @@ export default defineType({
   description: '(Show/Hide, Anchor ID, & Margins)',
   type: 'object',
   icon: CogIcon,
-  fieldsets: [
-    { title: 'Extra Margin', name: 'margin', options: { columns: 2 } },
-  ],
+  fieldsets: [{title: 'Extra Margin', name: 'margin', options: {columns: 2}}],
   options: {
     collapsible: true,
     collapsed: true,
@@ -34,7 +32,7 @@ export default defineType({
       type: 'number',
       fieldset: 'margin',
       options: {
-        list: [1, 2, 3, 4, 5],
+        list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       },
     }),
     defineField({
@@ -43,7 +41,7 @@ export default defineType({
       type: 'number',
       fieldset: 'margin',
       options: {
-        list: [1, 2, 3, 4, 5],
+        list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       },
     }),
   ],

@@ -6,16 +6,23 @@ import {ScrollTrigger} from 'gsap/all'
 import {useRef} from 'react'
 import LogoLeft from '../icons/LogoLeft'
 import LogoRight from '../icons/LogoRight'
+import Revealer from '../shared/Revealer'
 import SiteGrid from '../shared/SiteGrid'
 import SiteWidth from '../shared/SiteWidth'
 import PointilismCarousel from './PointilismCarousel'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function SectionPointilismCarousel({section}: {section: PbPointilismCarousel}) {
-  const {tagline, slides} = section
-  const hasSlides = slides && slides.length > 1
+const TRIGGER_START = 'top 85%'
 
+function isInViewport(el: Element) {
+  const rect = el.getBoundingClientRect()
+  return rect.top < window.innerHeight && rect.bottom > 0
+}
+
+export default function SectionPointilismCarousel({section}: {section: PbPointilismCarousel}) {
+  const {title, tagline, slides} = section
+  const hasSlides = slides && slides.length > 1
   const containerRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLParagraphElement>(null)
   const rightRef = useRef<HTMLSpanElement>(null)
@@ -34,14 +41,8 @@ export default function SectionPointilismCarousel({section}: {section: PbPointil
 
       gsap.set(container, {autoAlpha: 1})
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 85%',
-            markers: false,
-          },
-        })
+      const tl = gsap
+        .timeline({paused: true})
         .to(right, {
           x: travel,
           duration: 1,
@@ -58,6 +59,46 @@ export default function SectionPointilismCarousel({section}: {section: PbPointil
           },
           '< 0.3',
         )
+
+      const startsOnScreen = isInViewport(container)
+
+      if (startsOnScreen) {
+        const probe = ScrollTrigger.create({
+          trigger: container,
+          start: TRIGGER_START,
+          end: 'bottom top',
+        })
+        const pastTrigger = probe.progress > 0
+        probe.kill()
+
+        if (pastTrigger) {
+          let initialScroll: number | undefined
+          const scrollWatcher = ScrollTrigger.create({
+            start: 0,
+            end: 'max',
+            onUpdate(self) {
+              if (initialScroll === undefined) {
+                initialScroll = self.scroll()
+                return
+              }
+              if (self.scroll() !== initialScroll) {
+                scrollWatcher.kill()
+                tl.play()
+              }
+            },
+          })
+
+          return () => scrollWatcher.kill()
+        }
+      }
+
+      ScrollTrigger.create({
+        trigger: container,
+        start: TRIGGER_START,
+        markers: false,
+        once: true,
+        onEnter: () => tl.play(),
+      })
     },
     {scope: containerRef, dependencies: [tagline]},
   )
@@ -70,6 +111,11 @@ export default function SectionPointilismCarousel({section}: {section: PbPointil
     <SiteWidth>
       <SiteGrid>
         <div className="col-span-10 col-start-2 lg:col-span-6 lg:col-start-4 relative">
+          {title && (
+            <Revealer direction="fade-up" className="my-gut-300 text-center text-balance">
+              <h2 className="ts-h2">{title}</h2>
+            </Revealer>
+          )}
           <PointilismCarousel slides={slides} />
           {tagline && (
             <div

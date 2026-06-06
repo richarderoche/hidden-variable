@@ -1,6 +1,6 @@
 import {urlForPointilismSlide} from '@/sanity/lib/utils'
 import {useResizeObserver} from 'hamo'
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useMemo, useRef, useState} from 'react'
 
 const DEFAULT_PARAMS = {
   cols: 38,
@@ -28,10 +28,29 @@ const DEFAULT_PARAMS = {
   mouseStrength: 1.0,
 }
 
+const PLACEHOLDER_BRIGHTNESS = 0.3
+const PLACEHOLDER_DARKNESS = 0
+const MIN_INTRO_MS = 300
+const REVEAL_PARAMS = {
+  ...DEFAULT_PARAMS,
+  holdDuration: 0,
+  flipDuration: DEFAULT_PARAMS.flipDuration / 3,
+  flipStagger: DEFAULT_PARAMS.flipStagger / 3,
+}
+const INTRO_TRANSITION_PARAMS = {
+  ...DEFAULT_PARAMS,
+  holdDuration: 0.3,
+}
+
 // Sanity slides are cropped to 600×800 in urlForPointilismSlide
 const SLIDE_ASPECT = 800 / 600
 const DISPLAY_ROWS = Math.round(DEFAULT_PARAMS.cols * SLIDE_ASPECT)
 const DISPLAY_ASPECT = DEFAULT_PARAMS.cols / DISPLAY_ROWS
+
+function generatePlaceholderFrame(cols, rows, brightness = PLACEHOLDER_BRIGHTNESS) {
+  const data = Array.from({length: rows}, () => Array.from({length: cols}, () => brightness))
+  return {data, rows, cols}
+}
 
 function sampleImage(canvas, cols) {
   const ctx = canvas.getContext('2d')
@@ -54,6 +73,14 @@ function sampleImage(canvas, cols) {
     data.push(row)
   }
   return {data, rows, cols}
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+function getIntroTransitionMs(params) {
+  return (params.holdDuration + params.flipStagger + params.flipDuration) * 1000
 }
 
 function loadImg(src, canvas, maxDim = 800) {
@@ -294,8 +321,17 @@ function AnimCanvas({frames, params}) {
   )
 }
 
-export default function PointilismCarousel({slides}) {
-  const [frames, setFrames] = useState([])
+function PointilismCarouselContent({slides}) {
+  const darkFrame = useMemo(
+    () => generatePlaceholderFrame(DEFAULT_PARAMS.cols, DISPLAY_ROWS, PLACEHOLDER_DARKNESS),
+    [],
+  )
+  const placeholderFrame = useMemo(
+    () => generatePlaceholderFrame(DEFAULT_PARAMS.cols, DISPLAY_ROWS),
+    [],
+  )
+  const [frames, setFrames] = useState(() => [darkFrame, placeholderFrame])
+  const [phase, setPhase] = useState('reveal')
   const hc = useRef(null)
 
   useEffect(() => {
@@ -303,18 +339,56 @@ export default function PointilismCarousel({slides}) {
 
     async function loadSlides() {
       const urls = slides.map((slide) => urlForPointilismSlide(slide)).filter(Boolean)
+      if (!urls.length) return
 
-      try {
-        const results = []
-        for (const src of urls) {
-          await loadImg(src, hc.current)
-          if (cancelled) return
-          results.push(sampleImage(hc.current, DEFAULT_PARAMS.cols))
+      const revealDone = delay(getIntroTransitionMs(REVEAL_PARAMS)).then(() => {
+        if (cancelled) return
+        setFrames([placeholderFrame])
+        setPhase('intro')
+      })
+
+      const firstFramePromise = (async () => {
+        try {
+          await loadImg(urls[0], hc.current)
+          if (cancelled) return null
+          return sampleImage(hc.current, DEFAULT_PARAMS.cols)
+        } catch {
+          return null
         }
-        if (!cancelled) setFrames(results)
-      } catch {
-        if (!cancelled) setFrames([])
-      }
+      })()
+
+      await revealDone
+      if (cancelled) return
+
+      const introStartedAt = Date.now()
+      const firstFrame = await firstFramePromise
+      if (cancelled || !firstFrame) return
+
+      const remainingIntro = MIN_INTRO_MS - (Date.now() - introStartedAt)
+      if (remainingIntro > 0) await delay(remainingIntro)
+      if (cancelled) return
+
+      setFrames([placeholderFrame, firstFrame])
+      setPhase('transitioning')
+
+      const remainingFramesPromise = (async () => {
+        const loaded = [firstFrame]
+        for (const src of urls.slice(1)) {
+          await loadImg(src, hc.current)
+          if (cancelled) return null
+          loaded.push(sampleImage(hc.current, DEFAULT_PARAMS.cols))
+        }
+        return loaded
+      })()
+
+      await delay(getIntroTransitionMs(INTRO_TRANSITION_PARAMS))
+      if (cancelled) return
+
+      const allFrames = await remainingFramesPromise
+      if (cancelled || !allFrames) return
+
+      setFrames(allFrames)
+      setPhase('active')
     }
 
     void loadSlides()
@@ -322,14 +396,27 @@ export default function PointilismCarousel({slides}) {
     return () => {
       cancelled = true
     }
-  }, [slides])
+  }, [slides, darkFrame, placeholderFrame])
+
+  const params =
+    phase === 'reveal'
+      ? REVEAL_PARAMS
+      : phase === 'transitioning'
+        ? INTRO_TRANSITION_PARAMS
+        : DEFAULT_PARAMS
 
   return (
     <>
       <canvas ref={hc} style={{display: 'none'}} aria-hidden />
       <div style={{width: '100%', aspectRatio: DISPLAY_ASPECT}}>
-        {frames.length > 0 && <AnimCanvas frames={frames} params={DEFAULT_PARAMS} />}
+        <AnimCanvas frames={frames} params={params} />
       </div>
     </>
   )
+}
+
+export default function PointilismCarousel({slides}) {
+  const slideKey = slides.map((slide) => slide._key).join('-')
+
+  return <PointilismCarouselContent key={slideKey} slides={slides} />
 }

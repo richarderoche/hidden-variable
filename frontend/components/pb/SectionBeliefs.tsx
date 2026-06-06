@@ -22,13 +22,13 @@ export default function SectionBeliefs({section}: {section: PbBeliefs}) {
   useGSAP(
     () => {
       if (canHover || !hasCards) return
-      const stagger = 0.1
+      const stagger = 0.15
 
       const cards = gsap.utils.toArray<HTMLElement>('.flipcard')
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: flipcardsRef.current,
-          start: 'top 85%',
+          start: 'top 65%',
           once: true,
           markers: false,
         },
