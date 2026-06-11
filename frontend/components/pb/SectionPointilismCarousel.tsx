@@ -17,7 +17,12 @@ const TRIGGER_START = 'top 85%'
 
 function isInViewport(el: Element) {
   const rect = el.getBoundingClientRect()
-  return rect.top < window.innerHeight && rect.bottom > 0
+  return (
+    rect.top < window.innerHeight &&
+    rect.bottom > 0 &&
+    rect.left < window.innerWidth &&
+    rect.right > 0
+  )
 }
 
 export default function SectionPointilismCarousel({section}: {section: PbPointilismCarousel}) {
@@ -60,36 +65,13 @@ export default function SectionPointilismCarousel({section}: {section: PbPointil
           '< 0.3',
         )
 
+      ScrollTrigger.refresh()
       const startsOnScreen = isInViewport(container)
 
       if (startsOnScreen) {
-        const probe = ScrollTrigger.create({
-          trigger: container,
-          start: TRIGGER_START,
-          end: 'bottom top',
-        })
-        const pastTrigger = probe.progress > 0
-        probe.kill()
-
-        if (pastTrigger) {
-          let initialScroll: number | undefined
-          const scrollWatcher = ScrollTrigger.create({
-            start: 0,
-            end: 'max',
-            onUpdate(self) {
-              if (initialScroll === undefined) {
-                initialScroll = self.scroll()
-                return
-              }
-              if (self.scroll() !== initialScroll) {
-                scrollWatcher.kill()
-                tl.play()
-              }
-            },
-          })
-
-          return () => scrollWatcher.kill()
-        }
+        const delayAfterTitle = title ? 0.6 : 0.2
+        gsap.delayedCall(delayAfterTitle, () => tl.play())
+        return
       }
 
       ScrollTrigger.create({
@@ -100,7 +82,7 @@ export default function SectionPointilismCarousel({section}: {section: PbPointil
         onEnter: () => tl.play(),
       })
     },
-    {scope: containerRef, dependencies: [tagline]},
+    {scope: containerRef, dependencies: [tagline, title]},
   )
 
   if (!hasSlides) {

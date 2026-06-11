@@ -18,7 +18,7 @@ export default async function Footer() {
   return (
     <footer className="bottom-0 pb-gut-200 mt-gut">
       <SiteWidth>
-        <div className="mt-gut-500 mb-gut-400">
+        <div className="mt-gut-500 mb-gut-600">
           <LogoMotto className="w-full h-auto" />
         </div>
         <div className="flex justify-between items-center gap-gut">
