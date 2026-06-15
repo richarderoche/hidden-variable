@@ -25,17 +25,31 @@ export default function SectionBeliefs({section}: {section: PbBeliefs}) {
       const stagger = 0.15
 
       const cards = gsap.utils.toArray<HTMLElement>('.flipcard')
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: flipcardsRef.current,
-          start: 'top 65%',
-          once: true,
-          markers: false,
-        },
-      })
+      const tl = gsap.timeline({paused: true})
 
       cards.forEach((card, i) => {
         tl.call(() => card.classList.add('flipped'), undefined, i * stagger)
+      })
+
+      ScrollTrigger.create({
+        trigger: flipcardsRef.current,
+        start: 'top 45%',
+        markers: false,
+        onEnter: () => {
+          if (cards.every((card) => !card.classList.contains('flipped'))) {
+            tl.restart()
+          }
+        },
+      })
+
+      ScrollTrigger.create({
+        trigger: flipcardsRef.current,
+        start: 'top bottom',
+        markers: false,
+        onLeaveBack: () => {
+          tl.pause(0)
+          cards.forEach((card) => card.classList.remove('flipped'))
+        },
       })
 
       return () => {
