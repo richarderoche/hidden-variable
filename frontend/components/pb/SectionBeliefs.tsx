@@ -33,7 +33,7 @@ export default function SectionBeliefs({section}: {section: PbBeliefs}) {
 
       ScrollTrigger.create({
         trigger: flipcardsRef.current,
-        start: 'top 45%',
+        start: 'top 30%',
         markers: false,
         onEnter: () => {
           if (cards.every((card) => !card.classList.contains('flipped'))) {
